@@ -19,17 +19,15 @@ function matrix(M) {
 }
 
 function remove_ele(M, ele) {
-
     for (var i = 0; i < M.length; i++) {
         if (M[i] === ele) {
             M.splice(i, 1);
         }
-
     }
 }
 
 var B = matrix(M);
-document.getElementById('check').innerHTML = B;
+
 
 function set_images(M) {
     for (var i = 0; i < 20; i++) {
@@ -55,9 +53,9 @@ function reset_images(M, opened) {
             continue
         }
         else {
-        var btn = document.getElementById((i + 1).toString());
-        var im_path = '<img src="bg.png" />';
-        btn.innerHTML = im_path;
+            var btn = document.getElementById((i + 1).toString());
+            var im_path = '<img src="bg.png" />';
+            btn.innerHTML = im_path;
         }
     }
 }
@@ -66,13 +64,7 @@ function reset_images(M, opened) {
 var turn = 0; //zmienna oznaczająca kolejnosc wykonywania ruchu - 1 - 1sza karta, 2- druga karta, 3- reset
 var chosen = [0, 0];
 var opened = [0];
-
-function memory() {
-    if (turn == 2) {
-        reset_images(M);
-        turn = 0;
-    }
-}
+var start = new Date().getTime();
 
 function klik(id) {
     if (turn == 1) {
@@ -86,7 +78,7 @@ function klik(id) {
             }, 1000);
         }
         else {
-            opened.push(M[num-1]);
+            opened.push(M[num - 1]);
             document.getElementById('win').innerHTML = chosen + ',' + opened;
             reset_images(M, opened);
         }
@@ -103,15 +95,11 @@ function klik(id) {
     }
 }
 
-function check(m) {
-    if (m[0] != m[1]) {
-        sleep(1000);
-        reset_images(M);
-    }
-}
 function win(opened) {
     if (opened.length == 11) {
-        document.getElementById('win').innerHTML = 'YOU WON';
+        var end = new Date().getTime();
+        var score = end - start;
+        document.getElementById('win').innerHTML = 'YOU WON, your time: ' + score/1000 + 's';
         return
     }
 }
