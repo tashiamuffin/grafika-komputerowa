@@ -5,7 +5,7 @@ var M = [0, 0, 0, 0, 0,
     0, 0, 0, 0, 0];
 
 var values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
+//---------tworzymy macierz(wektor) z losowymi wartosciami memory--------
 function matrix(M) {
     for (var i = 0; i < 20; i++) {
         var a = Math.floor(Math.random() * values.length);
@@ -18,6 +18,7 @@ function matrix(M) {
     return M
 }
 
+//--------funkcja do usuwania danego elementu z listy
 function remove_ele(M, ele) {
 
     for (var i = 0; i < M.length; i++) {
@@ -29,8 +30,8 @@ function remove_ele(M, ele) {
 }
 
 var B = matrix(M);
-document.getElementById('check').innerHTML = B;
 
+//funkcja wstawiająca obrazki całej planszy
 function set_images(M) {
     for (var i = 0; i < 20; i++) {
         var btn = document.getElementById((i + 1).toString());
@@ -55,41 +56,36 @@ function reset_images(M, opened) {
             continue
         }
         else {
-        var btn = document.getElementById((i + 1).toString());
-        var im_path = '<img src="bg.png" />';
-        btn.innerHTML = im_path;
+            var btn = document.getElementById((i + 1).toString());
+            var im_path = '<img src="bg.png" />';
+            btn.innerHTML = im_path;
         }
     }
 }
 
-
+//inicjalizacja zmiennych
 var turn = 0; //zmienna oznaczająca kolejnosc wykonywania ruchu - 1 - 1sza karta, 2- druga karta, 3- reset
 var chosen = [0, 0];
 var opened = [0];
+var score = 0;
 
-function memory() {
-    if (turn == 2) {
-        reset_images(M);
-        turn = 0;
-    }
-}
 
+//funkcja własciwa
 function klik(id) {
     if (turn == 1) {
         num = parseInt(id);
         set_image(num - 1); //odwracamy karte
         chosen[1] = M[num - 1]; //sprawdzamy jej wartosc
-        document.getElementById('win').innerHTML = chosen;
         if (chosen[0] != chosen[1]) {
             setTimeout(function () {
                 reset_images(M, opened);
             }, 1000);
         }
         else {
-            opened.push(M[num-1]);
-            document.getElementById('win').innerHTML = chosen + ',' + opened;
+            opened.push(M[num - 1]);
             reset_images(M, opened);
         }
+        score += 1;
         win(opened);
         turn = 0;
         chosen = [0, 0];
@@ -99,19 +95,14 @@ function klik(id) {
         set_image(num - 1); //odwracamy karte
         chosen[0] = M[num - 1]; //sprawdzamy jej wartosc
         turn = 1;
-        document.getElementById('win').innerHTML = chosen + turn;
     }
 }
 
-function check(m) {
-    if (m[0] != m[1]) {
-        sleep(1000);
-        reset_images(M);
-    }
-}
+//funkcja sprawdzająca wygraną
 function win(opened) {
-    if (opened.length == 11) {
-        document.getElementById('win').innerHTML = 'YOU WON';
+    var set = new Set(opened);
+    if (set.size == 11) {
+        document.getElementById('win').innerHTML = 'YOU WON with ' + score + ' clicks';
         return
     }
 }
