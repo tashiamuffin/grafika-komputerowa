@@ -17,5 +17,6 @@ W ramach kursu opracowane zostały trzy listy, każda z nich o innej tematyce i 
  - W zadaniu 2. (tictactoe) zaimplementowano prostą grę w kółko i krzyżyk.
  - W zadaniu 3. (bresenham) zaimplementowano algorytm Bresenhama służący do rysowania prostej.
  - W zadaniu 4. (prosta) zaimplementowano najprostszy algortym służący do rysowania prostej.
- * **lista 3 - wykładowa** - opracowanie listy zadań dotyczących prostych zagadnień z grafiki 2D i 3D, pełna treść zadań jest umieszczona w pliku zadania.pdf.
+ * **lista 3** - polegała na napisaniu algorytmu rysującego zbiór Mandelbrota
+ * **lista wykładowa** - opracowanie listy zadań dotyczących prostych zagadnień z grafiki 2D i 3D, pełna treść zadań jest umieszczona w pliku zadania.pdf.
  
